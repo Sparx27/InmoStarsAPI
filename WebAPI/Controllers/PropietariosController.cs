@@ -1,5 +1,6 @@
 ﻿using Compartido.DTOs.Propietario;
 using LogicaAplicacion.Propietarios;
+using LogicaNegocio.EntidadesExceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,11 +37,11 @@ namespace WebAPI.Controllers
             try
             {
                 var res = await _serviciosPropietario.GetPropietarioById(propietarioId);
-                if (res == null)
-                {
-                    return NotFound("Usuario no encontrado por id");
-                }
                 return Ok(res);
+            }
+            catch(PropietarioException pex)
+            {
+                return NotFound(new { pex.Message });
             }
             catch (Exception ex)
             {
@@ -48,13 +49,53 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPost("registro-propietario")]
+        [HttpPost]
         public async Task<IActionResult> RegistrarPropietario([FromBody] PropietarioInsertDTO propietarioInsertDTO)
         {
             try
             {
                 var res = await _serviciosPropietario.InsertPropietario(propietarioInsertDTO);
                 return CreatedAtAction(nameof(RegistrarPropietario), res.PropietarioId, res);
+            }
+            catch(PropietarioException pex)
+            {
+                return NotFound(new { pex.Message });
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> ActualizarPropietario([FromBody] PropietarioUpdateDTO propietarioUpdateDTO)
+        {
+            try
+            {
+                var res = await _serviciosPropietario.UpdatePropietario(propietarioUpdateDTO);
+                return Ok(res);
+            }
+            catch (PropietarioException pex)
+            {
+                return NotFound(new { pex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> EliminarPropietario([FromBody] string propietarioId)
+        {
+            try
+            {
+                await _serviciosPropietario.DeletePropietario(propietarioId);
+                return NoContent();
+            }
+            catch(PropietarioException pex)
+            {
+                return NotFound(new { pex.Message });
             }
             catch(Exception ex)
             {

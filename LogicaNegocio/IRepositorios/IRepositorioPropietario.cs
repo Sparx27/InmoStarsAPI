@@ -12,5 +12,7 @@ namespace LogicaNegocio.IRepositorios
         Task<List<Propietario>> SelectPropietarios();
         Task<Propietario> SelectPropietarioById(Guid id);
         Task<Propietario> InsertPropietario(Propietario propietario);
+        Task<Propietario> UpdatePropietario(Propietario propietario);
+        Task DeletePropietario(Propietario propietario);
     }
 }

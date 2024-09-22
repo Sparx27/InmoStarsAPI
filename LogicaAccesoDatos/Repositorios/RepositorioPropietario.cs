@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LogicaNegocio.EntidadesExceptions;
 
 namespace LogicaAccesoDatos.Repositorios
 {
@@ -17,9 +18,16 @@ namespace LogicaAccesoDatos.Repositorios
             _context = context;
         }
 
-        public async Task<Propietario> SelectPropietarioById(Guid id) => 
-            await _context.Propietarios.FirstOrDefaultAsync(p => p.PropietarioId == id);
-
+        public async Task<Propietario> SelectPropietarioById(Guid id)
+        {
+            var propietario = await _context.Propietarios.FirstOrDefaultAsync(p => p.PropietarioId == id);
+            if(propietario == null)
+            {
+                throw new PropietarioException("Usuario no encontrado por Id");
+            }
+            return propietario;
+        }
+            
         public async Task<List<Propietario>> SelectPropietarios() =>
             await _context.Propietarios.ToListAsync();
 
@@ -28,6 +36,19 @@ namespace LogicaAccesoDatos.Repositorios
             await _context.Propietarios.AddAsync(propietario);
             await _context.SaveChangesAsync();
             return propietario;
+        }
+
+        public async Task<Propietario> UpdatePropietario(Propietario propietario)
+        {
+            _context.Propietarios.Update(propietario);
+            await _context.SaveChangesAsync();
+            return propietario;
+        }
+
+        public async Task DeletePropietario(Propietario propietario)
+        {
+            _context.Propietarios.Remove(propietario);
+            await _context.SaveChangesAsync();
         }
     }
 }

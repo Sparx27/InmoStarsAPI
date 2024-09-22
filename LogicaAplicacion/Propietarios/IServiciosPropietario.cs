@@ -12,5 +12,7 @@ namespace LogicaAplicacion.Propietarios
         Task<IEnumerable<PropietarioDTO>> GetPropietarios();
         Task<PropietarioDTO> GetPropietarioById(string id);
         Task<PropietarioDTO> InsertPropietario(PropietarioInsertDTO propietarioInsertDTO);
+        Task<PropietarioDTO> UpdatePropietario(PropietarioUpdateDTO propietarioUpdateDTO);
+        Task DeletePropietario(string id);
     }
 }
