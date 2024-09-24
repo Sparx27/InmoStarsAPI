@@ -85,8 +85,8 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> EliminarPropietario([FromBody] string propietarioId)
+        [HttpDelete("propietarioId")]
+        public async Task<IActionResult> EliminarPropietario(string propietarioId)
         {
             try
             {

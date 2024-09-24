@@ -23,15 +23,13 @@ namespace LogicaAccesoDatos.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("AnioConstruccion")
+                    b.Property<bool?>("Balcon")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Barrio")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Calle")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Ciudad")
@@ -41,20 +39,29 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<int>("Departamento")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Estado")
+                    b.Property<int?>("Dormitorios")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("M2Edificacods")
+                    b.Property<int?>("Estado")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("Garage")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal?>("M2Totales")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("M2Totales")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NumeroPuerta")
+                    b.Property<string>("NumeroApartamento")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Plantas")
+                    b.Property<string>("NumeroPuerta")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool?>("Patio")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Piso")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Precio")
@@ -66,13 +73,14 @@ namespace LogicaAccesoDatos.Migrations
                     b.Property<int>("Propuesta")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Tipo")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("InmuebleId");
 
                     b.HasIndex("PropietarioId");
 
-                    b.ToTable("Inmuebles", (string)null);
-
-                    b.UseTptMappingStrategy();
+                    b.ToTable("Inmuebles");
                 });
 
             modelBuilder.Entity("LogicaNegocio.Entidades.InmuebleFoto", b =>
@@ -124,66 +132,6 @@ namespace LogicaAccesoDatos.Migrations
                     b.ToTable("Propietarios");
                 });
 
-            modelBuilder.Entity("LogicaNegocio.Entidades.Apartamento", b =>
-                {
-                    b.HasBaseType("LogicaNegocio.Entidades.Inmueble");
-
-                    b.Property<bool>("Balcon")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Banios")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Barbacoa")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Dormitorios")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Garage")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("NumeroApartamento")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Patio")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Piso")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Porteria")
-                        .HasColumnType("INTEGER");
-
-                    b.ToTable("Apartamentos", (string)null);
-                });
-
-            modelBuilder.Entity("LogicaNegocio.Entidades.Casa", b =>
-                {
-                    b.HasBaseType("LogicaNegocio.Entidades.Inmueble");
-
-                    b.Property<bool>("Balcon")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Banios")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Barbacoa")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Dormitorios")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Garage")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Patio")
-                        .HasColumnType("INTEGER");
-
-                    b.ToTable("Casas", (string)null);
-                });
-
             modelBuilder.Entity("LogicaNegocio.Entidades.Inmueble", b =>
                 {
                     b.HasOne("LogicaNegocio.Entidades.Propietario", "Propietario")
@@ -193,24 +141,6 @@ namespace LogicaAccesoDatos.Migrations
                         .IsRequired();
 
                     b.Navigation("Propietario");
-                });
-
-            modelBuilder.Entity("LogicaNegocio.Entidades.Apartamento", b =>
-                {
-                    b.HasOne("LogicaNegocio.Entidades.Inmueble", null)
-                        .WithOne()
-                        .HasForeignKey("LogicaNegocio.Entidades.Apartamento", "InmuebleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("LogicaNegocio.Entidades.Casa", b =>
-                {
-                    b.HasOne("LogicaNegocio.Entidades.Inmueble", null)
-                        .WithOne()
-                        .HasForeignKey("LogicaNegocio.Entidades.Casa", "InmuebleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("LogicaNegocio.Entidades.Propietario", b =>

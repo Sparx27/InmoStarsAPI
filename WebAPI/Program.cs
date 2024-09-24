@@ -1,5 +1,6 @@
 using LogicaAccesoDatos;
 using LogicaAccesoDatos.Repositorios;
+using LogicaAplicacion.Inmuebles;
 using LogicaAplicacion.Propietarios;
 using LogicaNegocio.IRepositorios;
 using Microsoft.EntityFrameworkCore;
@@ -21,9 +22,11 @@ builder.Services.AddDbContext<InmuStarsDBContext>(opts =>
 
 // Repositorios
 builder.Services.AddScoped<IRepositorioPropietario, RepositorioPropietario>();
+builder.Services.AddScoped<IRepositorioInmueble, RepositorioInmueble>();
 
 // Servicios
 builder.Services.AddScoped<IServiciosPropietario, ServiciosPropietario>();
+builder.Services.AddScoped<IServiciosInmueble, ServiciosInmueble>();
 
 
 var app = builder.Build();

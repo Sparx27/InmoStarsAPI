@@ -12,57 +12,60 @@ using System.Threading.Tasks;
 namespace LogicaNegocio.Entidades
 {
     [Table("Inmuebles")]
-    public abstract class Inmueble
+    public class Inmueble
     {
         public Guid InmuebleId { get; set; }
 
         public Guid PropietarioId { get; set; }
 
         [Required(ErrorMessage = "Tipo de operación requerida")]
-        [Range(0, 3)]
+        [Range(1, 3)] // 1-Venta, 2-Alquiler, 3-AlquilerTemporal
         public int Propuesta { get; set; }
 
         public DateTime FechaPublicacion { get; } = DateTime.Now;
 
         [Required(ErrorMessage = "El precio es requerido")]
-        [Range(0, 1000000000)]
+        [Range(1, 1000000000)]
         public decimal Precio { get; set; }
 
         [Required(ErrorMessage = "Departamento es requerido")]
-        [Range(0, 18)]
+        [Range(1, 19)]
         public int Departamento { get; set; }
 
         [Required(ErrorMessage = "Ciudad es requerida")]
         public string Ciudad { get; set; }
 
-        public string Barrio { get; set; }
+        public string? Barrio { get; set; }
 
-        public string Calle { get; set; }
+        public string? Calle { get; set; }
 
-        public string NumeroPuerta { get; set; }
+        public string? NumeroPuerta { get; set; }
+
+        [Range(1, 4)]
+        public int? Estado { get; set; } // 1-nuevo, 2-usado, 3-en_construccion, 4-reciclado
+
+        [Range(1, 1000000)]
+        public decimal? M2Totales { get; set; }
+
+
+        // Separacion en tipos
+        [Required(ErrorMessage = "Tipo de inmueble es requerido")]
+        [Range(1, 4, ErrorMessage = "Tipo de inmueble inexistente")]
+        public int Tipo { get; set; } // 1-Apartamento, 2-Casa
 
         [Range(1, 99)]
-        public int Plantas { get; set; }
+        public int? Piso { get; set; }
 
-        [Range(0, 4)]
-        public int Estado { get; set; } // estado(nuevo, reciclado, en_pozo, usado)
+        public string NumeroApartamento { get; set; }
 
-        [Range(1700, 2024)]
-        public int AnioConstruccion { get; set; }
-
-        [Range(1, 1000000)]
-        public decimal M2Edificacods { get; set; }
-
-        [Range(1, 1000000)]
-        public decimal M2Totales { get; set; }
+        [Range(1, 99)]
+        public int? Dormitorios { get; set; }
+        public bool? Balcon { get; set; }
+        public bool? Garage { get; set; }
+        public bool? Patio { get; set; }
 
         // Navegacion
         [ForeignKey("PropietarioId")]
         public Propietario Propietario { get; set; }
-
-        public Inmueble()
-        {
-
-        }
     }
 }
