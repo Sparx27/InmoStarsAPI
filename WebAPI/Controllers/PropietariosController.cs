@@ -49,6 +49,24 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet("publicaciones-propietario/{propietarioId}")]
+        public async Task<IActionResult> GetInmueblesPropietario(string propietarioId)
+        {
+            try
+            {
+                var listaRes = await _serviciosPropietario.SelectInmueblesPropietario(propietarioId);
+                return Ok(listaRes);
+            }
+            catch (PropietarioException pex)
+            {
+                return NotFound(new { pex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> RegistrarPropietario([FromBody] PropietarioInsertDTO propietarioInsertDTO)
         {

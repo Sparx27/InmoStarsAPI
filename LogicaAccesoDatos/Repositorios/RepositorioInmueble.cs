@@ -68,12 +68,12 @@ namespace LogicaAccesoDatos.Repositorios
             }
 
             // Ejecuta la consulta y retorna los resultados
-            return await query.ToListAsync();
+            return await query.Include(i => i.Propietario).ToListAsync();
         }
 
         public async Task<Inmueble> SelectInmuebleById(Guid inmuebleId)
         {
-            var buscarInmueble = await _context.Inmuebles.FirstOrDefaultAsync(i => i.InmuebleId == inmuebleId);
+            var buscarInmueble = await _context.Inmuebles.Include(i => i.Propietario).FirstOrDefaultAsync(i => i.InmuebleId == inmuebleId);
             if(buscarInmueble == null)
             {
                 throw new InmuebleException("No se encontró el inmueble");

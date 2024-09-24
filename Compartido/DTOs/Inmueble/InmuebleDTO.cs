@@ -31,5 +31,9 @@ namespace Compartido.DTOs.Inmueble
         public bool? Balcon { get; set; }
         public bool? Garage { get; set; }
         public bool? Patio { get; set; }
+
+        // Propiedades de Propietario
+        public string PropietarioNombre { get; set; }
+        public string PropietarioTelefono { get; set; }
     }
 }

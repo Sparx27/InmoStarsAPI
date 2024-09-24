@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Compartido.Mappers;
 using LogicaAplicacion.Utilidades;
 using LogicaAplicacion.Validadores.Propietario;
+using Compartido.DTOs.Inmueble;
 
 namespace LogicaAplicacion.Propietarios
 {
@@ -68,5 +69,11 @@ namespace LogicaAplicacion.Propietarios
             await _repositorioPropietarios.DeletePropietario(buscarUsuario);
         }
 
+        public async Task<IEnumerable<InmuebleDTO>> SelectInmueblesPropietario(string propietarioId)
+        {
+            var buscarPropietario = await _repositorioPropietarios.SelectPropietarioById(new Guid(propietarioId));
+            var liInmuebles = await _repositorioPropietarios.SelectInmueblesPropietario(buscarPropietario.PropietarioId);
+            return liInmuebles.Select(i => InmuebleMapper.InmuebleToDTO(i));
+        }
     }
 }

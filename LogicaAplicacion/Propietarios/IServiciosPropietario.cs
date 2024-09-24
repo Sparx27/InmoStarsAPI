@@ -1,4 +1,5 @@
-﻿using Compartido.DTOs.Propietario;
+﻿using Compartido.DTOs.Inmueble;
+using Compartido.DTOs.Propietario;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace LogicaAplicacion.Propietarios
         Task<PropietarioDTO> InsertPropietario(PropietarioInsertDTO propietarioInsertDTO);
         Task<PropietarioDTO> UpdatePropietario(PropietarioUpdateDTO propietarioUpdateDTO);
         Task DeletePropietario(string id);
+        Task<IEnumerable<InmuebleDTO>> SelectInmueblesPropietario(string propietarioId);
     }
 }

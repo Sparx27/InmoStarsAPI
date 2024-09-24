@@ -87,7 +87,9 @@ namespace Compartido.Mappers
                     Dormitorios = inmueble.Dormitorios,
                     Balcon = inmueble.Balcon,
                     Garage = inmueble.Garage,
-                    Patio = inmueble.Patio
+                    Patio = inmueble.Patio,
+                    PropietarioNombre = inmueble.Propietario.Nombre,
+                    PropietarioTelefono = inmueble.Propietario.Telefono
                 };
             }
 
@@ -113,7 +115,9 @@ namespace Compartido.Mappers
                     Dormitorios = inmueble.Dormitorios,
                     Balcon = inmueble.Balcon,
                     Garage = inmueble.Garage,
-                    Patio = inmueble.Patio
+                    Patio = inmueble.Patio,
+                    PropietarioNombre = inmueble.Propietario.Nombre,
+                    PropietarioTelefono = inmueble.Propietario.Telefono
                 };
             }
 
@@ -138,7 +142,9 @@ namespace Compartido.Mappers
                     Piso = inmueble.Piso,
                     Balcon = inmueble.Balcon,
                     Garage = inmueble.Garage,
-                    Patio = inmueble.Patio
+                    Patio = inmueble.Patio,
+                    PropietarioNombre = inmueble.Propietario.Nombre,
+                    PropietarioTelefono = inmueble.Propietario.Telefono
                 };
             }
 

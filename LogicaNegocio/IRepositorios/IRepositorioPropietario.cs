@@ -14,5 +14,6 @@ namespace LogicaNegocio.IRepositorios
         Task<Propietario> InsertPropietario(Propietario propietario);
         Task<Propietario> UpdatePropietario(Propietario propietario);
         Task DeletePropietario(Propietario propietario);
+        Task<List<Inmueble>> SelectInmueblesPropietario(Guid propietarioId);
     }
 }

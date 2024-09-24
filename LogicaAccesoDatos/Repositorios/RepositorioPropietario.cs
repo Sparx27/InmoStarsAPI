@@ -50,5 +50,10 @@ namespace LogicaAccesoDatos.Repositorios
             _context.Propietarios.Remove(propietario);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Inmueble>> SelectInmueblesPropietario(Guid propietarioId) =>
+            await _context.Inmuebles.Where(i => i.PropietarioId == propietarioId)
+                .Include(i => i.Propietario)
+                .ToListAsync();
     }
 }

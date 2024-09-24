@@ -38,6 +38,7 @@ namespace LogicaAplicacion.Inmuebles
         public async Task<InmuebleDTO> UpdateInmueble(InmuebleUpdateDTO inmuebleUpdateDTO)
         {
             // Faltan validaciones
+
             // Inlcuido que propietario logueado ID = inmuebleUpdateDTO.Id
             // 1) Se busca inmueble, 2) Se compara ID del Token con IDPropietario de 1)
 
